@@ -1,0 +1,10 @@
+Flask
+python-dotenv
+Pillow
+user-agents
+Werkzeug
+psycopg2-binary
+Flask-SQLAlchemy
+gunicorn
+boto3
+requests
