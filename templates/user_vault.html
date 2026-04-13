@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Clinton tech Vault | Secure Digital Archive</title>
+    <title>Clinton Vault | Secure Digital Archive</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,67 +15,81 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #f5f7fa;
-            color: #1a1f36;
+            background: #0a0c12;
+            background-image: radial-gradient(circle at 15% 30%, rgba(79, 70, 229, 0.08) 0%, rgba(10, 12, 18, 1) 100%);
+            color: #eef2ff;
+            min-height: 100vh;
         }
 
-        /* Simple scrollbar */
+        /* Simple scrollbar - dark theme */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #e2e8f0;
+            background: #1e1f2c;
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
+            background: #4f46e5;
             border-radius: 10px;
         }
 
-        /* Smooth card hover */
+        /* Smooth card hover - glassmorphism */
         .item-card {
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            backdrop-filter: blur(4px);
         }
         .item-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(79, 70, 229, 0.3);
         }
 
-        /* Button styles */
+        /* Button styles - justice gradient */
         .btn-primary {
-            background: #4f46e5;
-            transition: all 0.2s;
+            background: linear-gradient(105deg, #4f46e5 0%, #7c3aed 100%);
+            transition: all 0.25s;
+            border: none;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
         }
         .btn-primary:hover {
-            background: #4338ca;
+            background: linear-gradient(105deg, #6366f1 0%, #8b5cf6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
         }
 
-        /* Toast messages */
+        /* Toast messages - modern */
         .toast-container {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 24px;
+            right: 24px;
             z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
         .toast {
-            background: white;
-            border-radius: 12px;
+            background: #1e1f2e;
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
             padding: 14px 20px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
-            gap: 10px;
-            animation: slideIn 0.2s ease;
+            gap: 12px;
+            animation: slideIn 0.25s ease;
+            border-left: 4px solid;
+            font-weight: 500;
         }
         .toast.success {
-            background: #10b981;
-            color: white;
+            border-left-color: #10b981;
+            background: rgba(16, 185, 129, 0.15);
+            color: #a7f3d0;
         }
         .toast.error {
-            background: #ef4444;
-            color: white;
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.15);
+            color: #fecaca;
         }
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
@@ -94,25 +108,27 @@
             display: block;
             text-align: center;
             padding: 10px;
-            background: #fef2f2;
+            background: rgba(239, 68, 68, 0.1);
             border-radius: 40px;
-            color: #dc2626;
+            color: #f87171;
             font-size: 14px;
             cursor: not-allowed;
+            backdrop-filter: blur(2px);
         }
         
         /* Restricted folder card style */
         .item-card.restricted {
             opacity: 0.7;
-            filter: grayscale(0.2);
+            filter: grayscale(0.25);
+            background: rgba(30, 31, 46, 0.6);
         }
         
         .item-card.restricted:hover {
             transform: none;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
-        /* Access denied modal */
+        /* Access denied modal - premium */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -120,8 +136,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
             align-items: center;
             justify-content: center;
             z-index: 1000;
@@ -129,20 +145,21 @@
         }
         
         .access-denied-modal {
-            background: white;
-            border-radius: 28px;
-            padding: 32px;
-            max-width: 420px;
+            background: #11131f;
+            border-radius: 32px;
+            padding: 36px 32px;
+            max-width: 440px;
             width: 100%;
             text-align: center;
             animation: modalSlideIn 0.3s ease;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            border: 1px solid rgba(79, 70, 229, 0.4);
         }
         
         @keyframes modalSlideIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px) scale(0.95);
+                transform: translateY(-20px) scale(0.96);
             }
             to {
                 opacity: 1;
@@ -151,29 +168,33 @@
         }
         
         .access-denied-modal i {
-            font-size: 64px;
+            font-size: 68px;
             color: #ef4444;
             margin-bottom: 20px;
+            filter: drop-shadow(0 4px 8px rgba(239,68,68,0.3));
         }
         
         .access-denied-modal h3 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1e293b;
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f1f5f9, #cbd5e6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 12px;
         }
         
         .access-denied-modal p {
-            color: #64748b;
-            margin-bottom: 24px;
+            color: #94a3b8;
+            margin-bottom: 28px;
             line-height: 1.5;
         }
         
         .access-denied-modal button {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
             color: white;
             border: none;
-            padding: 12px 28px;
+            padding: 12px 32px;
             border-radius: 40px;
             font-size: 14px;
             font-weight: 600;
@@ -183,7 +204,45 @@
         
         .access-denied-modal button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        /* glass card for login */
+        .glass-card {
+            background: rgba(18, 20, 30, 0.8);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(79, 70, 229, 0.3);
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #4f46e5 !important;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        
+        /* breadcrumb links */
+        .breadcrumb-link {
+            color: #a5b4fc;
+            transition: color 0.2s;
+        }
+        .breadcrumb-link:hover {
+            color: #c7d2fe;
+            text-decoration: underline;
+        }
+        
+        /* item name glow */
+        .item-name {
+            background: linear-gradient(135deg, #f0f3ff, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* header gradient border */
+        .premium-header {
+            border-bottom: 1px solid rgba(79, 70, 229, 0.3);
+            background: rgba(10, 12, 18, 0.8);
+            backdrop-filter: blur(12px);
         }
     </style>
 </head>
@@ -194,59 +253,61 @@
 <!-- Access Denied Modal -->
 <div id="accessDeniedModal" class="modal-overlay" onclick="closeAccessDeniedModal()">
     <div class="access-denied-modal" onclick="event.stopPropagation()">
-        <i class="fas fa-lock"></i>
+        <i class="fas fa-gavel"></i>
         <h3>Access Denied</h3>
-        <p id="deniedMessage">You don't have permission to access this folder. Please contact the administrator.</p>
+        <p id="deniedMessage">You don't have permission to access this folder. Contact the administrator.</p>
         <button onclick="closeAccessDeniedModal()">
-            <i class="fas fa-check"></i> Got it
+            <i class="fas fa-check-circle"></i> Understood
         </button>
     </div>
 </div>
 
 {% if not logged_in %}
 
-<!-- Login Page -->
-<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; background: #f0f2f5;">
-    <div style="background: white; border-radius: 28px; padding: 48px 40px; max-width: 460px; width: 100%; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);">
+<!-- Login Page - Clinton Vault premium -->
+<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;">
+    <div class="glass-card" style="border-radius: 40px; padding: 52px 44px; max-width: 500px; width: 100%; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);">
         
         <div style="text-align: center;">
-            <!-- Owner Photo -->
-            <div style="width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 20px; overflow: hidden; background: #e8eef5; border: 3px solid #e2e8f0;">
-                <img src="{{ url_for('owner_image') }}" 
-                     alt="Coach Odighiode" 
-                     class="owner-img"
-                     onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fas fa-shield-alt\' style=\'font-size: 48px; color: #94a3b8; line-height: 96px;\'></i>';">
+            <!-- Owner Photo with ring -->
+            <div style="width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 20px; overflow: hidden; background: linear-gradient(135deg, #4f46e5, #7c3aed); padding: 3px;">
+                <div style="width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: #0f111a;">
+                    <img src="{{ url_for('owner_image') }}" 
+                         alt="Coach Odighiode" 
+                         class="owner-img"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fas fa-scale-balanced\' style=\'font-size: 52px; color: #a5b4fc; line-height: 104px; display: block; text-align: center;\'></i>';">
+                </div>
             </div>
             
-            <h1 style="font-size: 32px; font-weight: 700; color: #1a1f36; margin-bottom: 8px;">
-               Clinton tech Vault
+            <h1 style="font-size: 38px; font-weight: 800; background: linear-gradient(125deg, #ffffff, #a5b4fc); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 8px;">
+                Clinton Vault
             </h1>
-            <p style="color: #64748b; font-size: 15px; margin-bottom: 16px;">Secure document storage</p>
+            <p style="color: #94a3b8; font-size: 15px; margin-bottom: 18px; letter-spacing: 0.3px;">Classified • Integrity • Access</p>
             
-            <div style="background: #f1f5f9; display: inline-block; padding: 6px 18px; border-radius: 30px; margin-bottom: 32px;">
-                <i class="fas fa-user" style="color: #4f46e5; font-size: 13px;"></i>
-                <span style="font-size: 13px; color: #334155; margin-left: 6px;">Coach Odighiode</span>
+            <div style="background: rgba(79, 70, 229, 0.2); display: inline-block; padding: 6px 20px; border-radius: 40px; margin-bottom: 34px; backdrop-filter: blur(4px); border: 1px solid rgba(79,70,229,0.3);">
+                <i class="fas fa-user-shield" style="color: #818cf8; font-size: 13px;"></i>
+                <span style="font-size: 13px; color: #cbd5e1; margin-left: 8px; font-weight: 500;">Coach Odighiode</span>
             </div>
             
-            <p style="color: #475569; margin-bottom: 28px; font-size: 14px;">Enter your 8-character PIN</p>
+            <p style="color: #cbd5e6; margin-bottom: 28px; font-size: 14px; font-weight: 400;">Enter your 8‑character master PIN</p>
         </div>
 
         <form method="POST" action="">
-            <div style="margin-bottom: 24px;">
+            <div style="margin-bottom: 28px;">
                 <div style="position: relative;">
-                    <i class="fas fa-key" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
-                    <input type="text" name="pin" placeholder="Enter PIN" required maxlength="8" 
-                        style="width: 100%; padding: 14px 16px 14px 46px; border: 1px solid #e2e8f0; border-radius: 14px; font-size: 15px; font-family: monospace; letter-spacing: 1px;">
+                    <i class="fas fa-fingerprint" style="position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #818cf8; font-size: 18px;"></i>
+                    <input type="text" name="pin" placeholder="••••••••" required maxlength="8" 
+                        style="width: 100%; padding: 16px 18px 16px 52px; border: 1px solid rgba(79,70,229,0.5); border-radius: 60px; font-size: 16px; font-family: 'JetBrains Mono', monospace; letter-spacing: 2px; background: #0b0d14; color: #e2e8f0; backdrop-filter: blur(4px);">
                 </div>
             </div>
-            <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; color: white; border: none; border-radius: 14px; font-weight: 600; font-size: 15px; cursor: pointer;">
-                <i class="fas fa-lock-open"></i> Access Vault
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 60px; font-weight: 700; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <i class="fas fa-unlock-alt"></i> Unlock Vault
             </button>
         </form>
 
-        <div style="text-align: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
-            <p style="font-size: 12px; color: #94a3b8;">
-                <i class="fas fa-shield-alt"></i> Encrypted access | Authorized only
+        <div style="text-align: center; margin-top: 34px; padding-top: 20px; border-top: 1px solid rgba(79,70,229,0.2);">
+            <p style="font-size: 12px; color: #64748b;">
+                <i class="fas fa-shield-haltered"></i> Encrypted channel • Authorized personnel only
             </p>
         </div>
     </div>
@@ -254,135 +315,139 @@
 
 {% else %}
 
-<!-- Main Vault Dashboard -->
-<div style="background: #f5f7fa; min-height: 100vh;">
+<!-- Main Vault Dashboard - Clinton Vault Theme -->
+<div style="background: #0a0c12; min-height: 100vh;">
     
-    <!-- Header -->
-    <div style="background: white; border-bottom: 1px solid #e2e8f0; padding: 20px 28px;">
-        <div style="max-width: 1400px; margin: 0 auto;">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <!-- Owner small photo -->
-                    <div style="width: 48px; height: 48px; border-radius: 50%; overflow: hidden; background: #e2e8f0;">
-                        <img src="{{ url_for('owner_image') }}" 
-                             alt="Coach" 
-                             class="owner-img"
-                             onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-gavel\' style=\'font-size: 24px; color: #94a3b8; line-height: 48px; text-align: center; display: block;\'></i>';">
+    <!-- Premium Header with blur -->
+    <div class="premium-header" style="padding: 20px 32px; position: sticky; top: 0; z-index: 100;">
+        <div style="max-width: 1440px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px;">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <!-- Owner photo with ring -->
+                    <div style="width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background: linear-gradient(145deg, #4f46e5, #a855f7); padding: 2px;">
+                        <div style="width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: #0f111a;">
+                            <img src="{{ url_for('owner_image') }}" 
+                                 alt="Coach" 
+                                 class="owner-img"
+                                 onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-balance-scale\' style=\'font-size: 30px; color: #a5b4fc; line-height: 52px; text-align: center; display: block;\'></i>';">
+                        </div>
                     </div>
                     <div>
-                        <h1 style="font-size: 22px; font-weight: 700; color: #1a1f36;">Justice Vault</h1>
-                        <div style="display: flex; gap: 12px; margin-top: 4px;">
-                            <span style="font-size: 12px; color: #64748b; background: #f1f5f9; padding: 2px 10px; border-radius: 20px;">
+                        <h1 style="font-size: 26px; font-weight: 800; background: linear-gradient(135deg, #ffffff, #c7d2fe); -webkit-background-clip: text; background-clip: text; color: transparent;">Clinton Vault</h1>
+                        <div style="display: flex; gap: 14px; margin-top: 6px;">
+                            <span style="font-size: 12px; color: #94a3b8; background: rgba(79,70,229,0.2); padding: 3px 14px; border-radius: 30px; backdrop-filter: blur(2px);">
                                 <i class="fas fa-id-card"></i> {{ session.user_pin }}
                             </span>
-                            <span style="font-size: 12px; color: #64748b;">
-                                <i class="fas fa-user"></i> Coach Odighiode
+                            <span style="font-size: 12px; color: #818cf8;">
+                                <i class="fas fa-user-tie"></i> Coach Odighiode
                             </span>
                         </div>
                     </div>
                 </div>
-                <a href="{{ url_for('logout') }}" style="background: #f1f5f9; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: #475569; font-size: 14px;">
-                    <i class="fas fa-sign-out-alt"></i> Logout
+                <a href="{{ url_for('logout') }}" style="background: rgba(239,68,68,0.15); padding: 8px 24px; border-radius: 40px; text-decoration: none; color: #fca5a5; font-size: 14px; font-weight: 500; transition: 0.2s; border: 1px solid rgba(239,68,68,0.3);">
+                    <i class="fas fa-sign-out-alt"></i> Exit Vault
                 </a>
             </div>
             
-            <!-- Breadcrumb - Show only accessible folders in breadcrumb -->
-            <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: 13px;">
-                <a href="{{ url_for('user_vault') }}" style="color: #4f46e5; text-decoration: none;">Home</a>
+            <!-- Breadcrumb with elegant icons -->
+            <div style="margin-top: 22px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 13px;">
+                <a href="{{ url_for('user_vault') }}" class="breadcrumb-link" style="text-decoration: none;"><i class="fas fa-home"></i> Home</a>
                 {% for crumb in breadcrumb %}
-                    <i class="fas fa-chevron-right" style="font-size: 10px; color: #cbd5e1;"></i>
-                    <span style="color: #64748b;">{{ crumb.name }}</span>
+                    <i class="fas fa-chevron-right" style="font-size: 9px; color: #475569;"></i>
+                    <span style="color: #a5b4fc; font-weight: 500;">{{ crumb.name }}</span>
                 {% endfor %}
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div style="max-width: 1400px; margin: 0 auto; padding: 32px 28px;">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 36px 32px 60px;">
         
-        <!-- Back button -->
+        <!-- Back button if inside folder -->
         {% if folder_id %}
-        <div style="margin-bottom: 24px;">
-            <a href="{{ url_for('user_vault') }}" style="display: inline-flex; align-items: center; gap: 8px; background: white; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: #475569; font-size: 14px; border: 1px solid #e2e8f0;">
-                <i class="fas fa-arrow-left"></i> Back to Root
+        <div style="margin-bottom: 28px;">
+            <a href="{{ url_for('user_vault') }}" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(30, 31, 46, 0.7); backdrop-filter: blur(8px); padding: 8px 24px; border-radius: 40px; text-decoration: none; color: #cbd5e1; font-size: 14px; border: 1px solid rgba(79,70,229,0.3); transition: 0.2s;">
+                <i class="fas fa-arrow-left"></i> Return to Root
             </a>
         </div>
         {% endif %}
 
-        <!-- Info bar -->
-        <div style="background: white; border-radius: 16px; padding: 16px 24px; margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border: 1px solid #e2e8f0;">
-            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <!-- Info bar - premium stats -->
+        <div style="background: rgba(18, 20, 30, 0.7); backdrop-filter: blur(12px); border-radius: 28px; padding: 18px 28px; margin-bottom: 36px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; border: 1px solid rgba(79,70,229,0.25);">
+            <div style="display: flex; gap: 28px; flex-wrap: wrap;">
                 <div>
-                    <i class="fas fa-folder-open" style="color: #f59e0b;"></i>
-                    <span style="font-weight: 600; margin-left: 6px;">{{ items|length }}</span>
-                    <span style="color: #64748b; font-size: 13px;"> items</span>
+                    <i class="fas fa-database" style="color: #f59e0b;"></i>
+                    <span style="font-weight: 700; margin-left: 8px; color: #f1f5f9;">{{ items|length }}</span>
+                    <span style="color: #94a3b8; font-size: 13px;"> secured items</span>
                 </div>
                 <div>
-                    <i class="fas fa-shield-alt" style="color: #10b981;"></i>
-                    <span style="color: #64748b; font-size: 13px; margin-left: 6px;">Secure connection</span>
+                    <i class="fas fa-shield-virus" style="color: #10b981;"></i>
+                    <span style="color: #94a3b8; font-size: 13px; margin-left: 6px;">Quantum encryption ready</span>
                 </div>
             </div>
-            <div style="font-size: 12px; color: #94a3b8;">
-                <i class="fas fa-clock"></i> Session active
+            <div style="font-size: 12px; color: #6b7280; background: rgba(0,0,0,0.3); padding: 4px 12px; border-radius: 40px;">
+                <i class="fas fa-hourglass-half"></i> Active session
             </div>
         </div>
 
-        <!-- Items Grid -->
+        <!-- Items Grid - modern justice theme -->
         {% if items %}
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 28px;">
             {% for item in items %}
-            <div class="item-card {% if not item.can_access and item.type == 'folder' %}restricted{% endif %}" style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <div class="item-card {% if not item.can_access and item.type == 'folder' %}restricted{% endif %}" style="background: rgba(16, 18, 27, 0.75); backdrop-filter: blur(8px); border-radius: 28px; overflow: hidden; border: 1px solid rgba(79, 70, 229, 0.25); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);">
                 
-                <!-- Preview area -->
-                <div style="background: #f8fafc; height: 160px; display: flex; align-items: center; justify-content: center; position: relative;">
+                <!-- Preview area with badge -->
+                <div style="background: rgba(0, 0, 0, 0.35); height: 170px; display: flex; align-items: center; justify-content: center; position: relative;">
                     {% if not item.can_access and item.type == 'folder' %}
-                        <div style="position: absolute; top: 12px; right: 12px; background: #ef4444; color: white; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">
-                            <i class="fas fa-lock"></i> Restricted
+                        <div style="position: absolute; top: 14px; right: 14px; background: linear-gradient(135deg, #ef4444, #b91c1c); color: white; padding: 5px 12px; border-radius: 40px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; backdrop-filter: blur(4px);">
+                            <i class="fas fa-lock"></i> CLASSIFIED
                         </div>
                     {% endif %}
                     
                     {% if item.thumbnail_url %}
                         <img src="{{ item.thumbnail_url }}" style="width: 100%; height: 100%; object-fit: cover;">
                     {% elif item.type == 'folder' %}
-                        <div style="background: {% if item.can_access %}#fef3c7{% else %}#e2e8f0{% endif %}; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-folder-open" style="font-size: 60px; color: {% if item.can_access %}#d97706{% else %}#94a3b8{% endif %};"></i>
+                        <div style="background: {% if item.can_access %}#312e81{% else %}#1e1b4b{% endif %}; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-folder-open" style="font-size: 70px; color: {% if item.can_access %}#fbbf24{% else %}#6b7280{% endif %}; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));"></i>
                         </div>
                     {% else %}
-                        <div style="background: #e0e7ff; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas {{ item.icon if item.icon else 'fa-file-alt' }}" style="font-size: 60px; color: #4f46e5;"></i>
+                        <div style="background: linear-gradient(145deg, #2d2b55, #1a1c2c); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas {{ item.icon if item.icon else 'fa-file-pdf' }}" style="font-size: 70px; color: #818cf8; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));"></i>
                         </div>
                     {% endif %}
                 </div>
                 
-                <!-- Info -->
-                <div style="padding: 18px;">
-                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 6px; color: #1e293b; word-break: break-word;">{{ item.name }}</h3>
+                <!-- Info area -->
+                <div style="padding: 20px 20px 22px;">
+                    <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #f1f5f9; word-break: break-word; letter-spacing: -0.2px;">{{ item.name }}</h3>
                     {% if item.size %}
-                    <p style="color: #64748b; font-size: 12px; margin-bottom: 14px;">{{ (item.size / 1024 / 1024)|round(2) }} MB</p>
+                    <p style="color: #94a3b8; font-size: 12px; margin-bottom: 18px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fas fa-hdd"></i> {{ (item.size / 1024 / 1024)|round(2) }} MB
+                    </p>
                     {% elif item.link_url %}
-                    <p style="color: #64748b; font-size: 11px; margin-bottom: 14px;">
-                        <i class="fa-user-edit"></i> product file from sir justice
+                    <p style="color: #94a3b8; font-size: 11px; margin-bottom: 18px; background: rgba(79,70,229,0.15); padding: 4px 8px; border-radius: 40px; display: inline-block;">
+                        <i class="fas fa-scroll"></i> privileged file
                     </p>
                     {% endif %}
                     
-                    <!-- Action -->
+                    <!-- Action button with premium styling -->
                     {% if item.type == 'folder' %}
                         {% if item.can_access %}
-                            <a href="{{ url_for('user_vault', folder=item.id) }}" style="display: block; text-align: center; padding: 10px; background: #f1f5f9; border-radius: 40px; text-decoration: none; color: #334155; font-size: 14px;">
-                                <i class="fas fa-folder-open"></i> Open
+                            <a href="{{ url_for('user_vault', folder=item.id) }}" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; background: linear-gradient(95deg, #4f46e5, #7c3aed); border-radius: 60px; text-decoration: none; color: white; font-size: 14px; font-weight: 600; transition: 0.2s;">
+                                <i class="fas fa-folder-open"></i> Enter Chamber
                             </a>
                         {% else %}
-                            <button onclick="showAccessDenied('{{ item.name }}')" style="display: block; width: 100%; text-align: center; padding: 10px; background: #fef2f2; border-radius: 40px; color: #dc2626; font-size: 14px; border: none; cursor: pointer;">
-                                <i class="fas fa-lock"></i> No Access
+                            <button onclick="showAccessDenied('{{ item.name }}')" style="display: flex; width: 100%; align-items: center; justify-content: center; gap: 8px; padding: 10px; background: rgba(239,68,68,0.15); border-radius: 60px; color: #f87171; font-size: 14px; font-weight: 600; border: 1px solid rgba(239,68,68,0.4); cursor: pointer;">
+                                <i class="fas fa-ban"></i> Access Restricted
                             </button>
                         {% endif %}
                     {% elif item.can_access %}
-                        <a href="{{ url_for('download_item', item_id=item.id) }}" target="_blank" style="display: block; text-align: center; padding: 10px; background: #4f46e5; border-radius: 40px; text-decoration: none; color: white; font-size: 14px;">
-                            <i class="fas fa-download"></i> Download
+                        <a href="{{ url_for('download_item', item_id=item.id) }}" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; background: linear-gradient(95deg, #0f172a, #1e293b); border-radius: 60px; text-decoration: none; color: #a5b4fc; font-size: 14px; font-weight: 600; border: 1px solid #4f46e5;">
+                            <i class="fas fa-download"></i> Retrieve Document
                         </a>
                     {% else %}
-                        <div class="btn-disabled">
-                            <i class="fas fa-lock"></i> No access
+                        <div class="btn-disabled" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class="fas fa-lock"></i> Unauthorized
                         </div>
                     {% endif %}
                 </div>
@@ -391,29 +456,29 @@
         </div>
         {% else %}
         
-        <!-- Empty state -->
-        <div style="text-align: center; padding: 60px 40px; background: white; border-radius: 20px; border: 1px solid #e2e8f0;">
-            <i class="fas fa-folder-open" style="font-size: 64px; color: #cbd5e1;"></i>
-            <h3 style="font-size: 22px; font-weight: 600; margin: 20px 0 8px; color: #334155;">No items yet</h3>
-            <p style="color: #64748b;">This folder is empty</p>
+        <!-- Elegant empty state -->
+        <div style="text-align: center; padding: 70px 40px; background: rgba(18, 20, 30, 0.6); backdrop-filter: blur(12px); border-radius: 44px; border: 1px solid rgba(79,70,229,0.2);">
+            <i class="fas fa-archive" style="font-size: 72px; color: #475569;"></i>
+            <h3 style="font-size: 28px; font-weight: 700; margin: 24px 0 12px; background: linear-gradient(135deg, #e2e8f0, #94a3b8); -webkit-background-clip: text; background-clip: text; color: transparent;">Silent Vault</h3>
+            <p style="color: #94a3b8; font-size: 15px;">This chamber contains no classified items</p>
         </div>
         {% endif %}
 
-        <!-- Footer -->
-        <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #e2e8f0; text-align: center;">
-            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px;">
-                <span style="font-size: 12px; color: #64748b;">
-                    <i class="fas fa-shield-alt"></i> AES-256
+        <!-- Footer with justice identity -->
+        <div style="margin-top: 70px; padding-top: 32px; border-top: 1px solid rgba(79,70,229,0.2); text-align: center;">
+            <div style="display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 20px;">
+                <span style="font-size: 12px; color: #6b7280;">
+                    <i class="fas fa-microchip"></i> AES-256 | Secure Core
                 </span>
-                <span style="font-size: 12px; color: #64748b;">
-                    <i class="fas fa-user"></i> Coach Odighiode
+                <span style="font-size: 12px; color: #6b7280;">
+                    <i class="fas fa-gavel"></i> Clinton Vault Integrity
                 </span>
-                <span style="font-size: 12px; color: #64748b;">
-                    <i class="fas fa-calendar"></i> 2026
+                <span style="font-size: 12px; color: #6b7280;">
+                    <i class="fas fa-calendar-alt"></i> 2026
                 </span>
             </div>
-            <p style="font-size: 12px; color: #94a3b8;">
-                EJIOFOR-BENJAMIN CLINTON - Secure Digital Archive
+            <p style="font-size: 12px; color: #4b5563; letter-spacing: 0.3px;">
+                Clinton Vault — Sovereign Digital Archive
             </p>
         </div>
     </div>
@@ -421,38 +486,38 @@
 {% endif %}
 
 <script>
-    // Show access denied modal
+    // Show access denied modal with dynamic folder name
     function showAccessDenied(folderName) {
         const modal = document.getElementById('accessDeniedModal');
         const messageEl = document.getElementById('deniedMessage');
-        messageEl.innerHTML = `You don't have permission to access "<strong>${escapeHtml(folderName)}</strong>".<br><br>Please contact the administrator to request access.`;
+        messageEl.innerHTML = `Access to "<strong style="color:#fca5a5;">${escapeHtml(folderName)}</strong>" is prohibited.<br><br>Your credentials lack clearance. Contact the administrator.`;
         modal.style.display = 'flex';
     }
     
-    // Close access denied modal
+    // Close modal
     function closeAccessDeniedModal() {
         document.getElementById('accessDeniedModal').style.display = 'none';
     }
     
-    // Escape HTML to prevent XSS
+    // Escape HTML to prevent injection
     function escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
     }
     
-    // Toast message function
+    // Toast notification system
     function showToast(message, type) {
         var container = document.getElementById('toastContainer');
         if (!container) return;
         var toast = document.createElement('div');
         toast.className = 'toast ' + type;
-        toast.innerHTML = '<i class="fas ' + (type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle') + '"></i><span>' + message + '</span>';
+        toast.innerHTML = '<i class="fas ' + (type === 'success' ? 'fa-check-circle' : 'fa-triangle-exclamation') + '"></i><span>' + message + '</span>';
         container.appendChild(toast);
         setTimeout(function() {
             toast.style.opacity = '0';
-            setTimeout(function() { toast.remove(); }, 200);
-        }, 3500);
+            setTimeout(function() { toast.remove(); }, 250);
+        }, 3800);
     }
     
     // Close modal on escape key
@@ -462,7 +527,7 @@
         }
     });
     
-    // Flash messages from server
+    // Flash messages from backend
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
